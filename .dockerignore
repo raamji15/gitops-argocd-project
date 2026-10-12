@@ -1,0 +1,7 @@
+.git
+.github
+docs
+scripts
+k8s
+argocd
+*.md

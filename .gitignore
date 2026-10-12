@@ -142,6 +142,10 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 
+# Local cluster/project artifacts
+.kind/
+*.kubeconfig
+
 # Astro generated types
 .astro/
 

@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-demo-dashboard
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: gitops-demo-dashboard
+    app.kubernetes.io/part-of: gitops-demo
+  annotations:
+    app.kubernetes.io/description: "Student demonstration of GitOps reconciliation with Argo CD"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/REPLACE_WITH_OWNER/REPLACE_WITH_REPOSITORY.git
+    targetRevision: main
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gitops-demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
