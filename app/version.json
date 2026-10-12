@@ -1,0 +1,13 @@
+{
+  "version": "v1.0.0",
+  "releaseId": "gitops-dashboard-1",
+  "releaseDate": "2026-10-12",
+  "releaseTitle": "The first GitOps dashboard",
+  "releaseNotes": "The initial release introduces a clear Git → Argo CD → Kubernetes learning path, a presentation-only status panel, and release metadata loaded from this file.",
+  "history": [
+    {
+      "version": "v1.0.0",
+      "description": "Initial dashboard, container, and GitOps workflow."
+    }
+  ]
+}

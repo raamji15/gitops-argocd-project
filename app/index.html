@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101927">
+    <meta name="description" content="A student-friendly GitOps deployment dashboard demonstrating Git, Kubernetes, and Argo CD.">
+    <title>GitOps Demo Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="GitOps Demo Dashboard home">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>GitOps <span class="muted">/</span> Demo</span>
+      </a>
+      <a class="top-link" href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noreferrer">How GitOps works <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero panel">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="pulse-dot"></span> A tiny app with a big idea</p>
+          <h1>GitOps Demo<br><span>Dashboard</span></h1>
+          <p class="lede">See how a Git commit can describe the application Kubernetes should run—and how Argo CD keeps those two states aligned.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#gitops">Explore the workflow <span aria-hidden="true">↓</span></a>
+            <span class="release-badge" id="version-badge">Loading release…</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="orbit-core"><span>G</span></div>
+          <span class="orbit-label label-git">GIT</span><span class="orbit-label label-argo">ARGO</span><span class="orbit-label label-k8s">K8S</span>
+        </div>
+      </section>
+
+      <section class="status-grid" aria-label="Demonstration status">
+        <article class="panel status-card">
+          <div class="section-heading"><div><p class="eyebrow">DEMO STATUS</p><h2>What this page knows</h2></div><span class="status-pill"><span class="status-dot"></span> Presentation only</span></div>
+          <p class="status-note">This status is <strong>static presentation metadata</strong>, not live Kubernetes or Argo CD health. Use the verification commands in the project README for real cluster status.</p>
+          <div class="status-facts">
+            <div><span class="fact-icon">01</span><span><small>Release</small><strong id="release-version">Loading…</strong></span></div>
+            <div><span class="fact-icon">02</span><span><small>Build identifier</small><strong id="release-id">Loading…</strong></span></div>
+            <div><span class="fact-icon">03</span><span><small>Release date</small><strong id="release-date">Loading…</strong></span></div>
+          </div>
+        </article>
+        <article class="panel release-card">
+          <p class="eyebrow">LATEST RELEASE</p>
+          <h2 id="release-title">Loading release notes…</h2>
+          <p id="release-summary">Release details are loaded from <code>version.json</code>.</p>
+          <div class="release-rule"></div>
+          <h3>Release history</h3>
+          <ol class="history-list" id="release-history"><li>Loading history…</li></ol>
+        </article>
+      </section>
+
+      <section class="panel workflow" id="gitops">
+        <div class="section-heading"><div><p class="eyebrow">THE IDEA, IN PLAIN ENGLISH</p><h2>Git is the plan. Argo CD is the watchful teammate.</h2></div><span class="step-count">3 simple parts</span></div>
+        <div class="workflow-grid">
+          <article><span class="workflow-number">01</span><div class="workflow-icon">⌘</div><h3>Describe it in Git</h3><p>Application files and Kubernetes manifests live together in a version-controlled repository. A reviewed commit becomes the desired state.</p></article>
+          <article><span class="workflow-number">02</span><div class="workflow-icon">↻</div><h3>Argo CD compares</h3><p>Argo CD reads the repository and compares its manifests with the cluster. It reports differences and can reconcile approved changes.</p></article>
+          <article><span class="workflow-number">03</span><div class="workflow-icon">▤</div><h3>Kubernetes runs it</h3><p>Kubernetes schedules the container and keeps the requested replicas running. A Service gives the dashboard a stable in-cluster address.</p></article>
+        </div>
+        <div class="boundary-note"><span aria-hidden="true">↗</span><p><strong>One important boundary:</strong> Argo CD deploys Kubernetes resources; it does <strong>not</strong> build Docker images. Build and load the image separately before changing the Deployment image tag.</p></div>
+      </section>
+
+      <footer class="footer">
+        <span>Built for learning, not production. <span id="footer-release">Release loading…</span></span>
+        <span>Docker packages · Kubernetes runs · Argo CD reconciles</span>
+      </footer>
+    </main>
+  </body>
+</html>
