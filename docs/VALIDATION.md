@@ -1,6 +1,6 @@
 # Validation record
 
-This record describes commands actually run in the coding-agent environment, not a claimed end-to-end classroom deployment. The environment was Linux x86_64 with Bash, Git, Docker CLI/daemon, kubectl, kind, jq, yq, ShellCheck, Python 3, Make, and curl. A `gitops-demo` kind cluster was created for testing and then used for the attempts described below.
+This record describes commands actually run in the coding-agent environment, not a claimed end-to-end classroom deployment. The environment was Linux x86_64 with Bash, Git, Docker CLI/daemon, kubectl, kind, jq, yq, ShellCheck, Python 3, Make, and curl. A `gitops-demo` kind cluster was created for testing, used for the attempts described below, then explicitly removed with the cleanup script.
 
 ## Executed successfully
 
@@ -16,7 +16,7 @@ This record describes commands actually run in the coding-agent environment, not
 ## Attempted but not successful
 
 - The first client-side `scripts/install-argocd.sh` attempt failed because the current stable `applicationsets.argoproj.io` CRD exceeded the client-side apply annotation limit (262144 bytes). The installer was changed to official-manifest server-side apply. The manifest resources then applied, but Argo CD Pods entered `ImagePullBackOff`: the kind node could not resolve `cdn01.quay.io` (`lookup cdn01.quay.io ... server misbehaving`). The installer was still waiting for workload readiness when that DNS failure was diagnosed.
-- After the v1 image was loaded, `kubectl apply -k k8s` created the Namespace, Deployment, and Service, but the Deployment rollout timed out. Nginx started and `kubectl exec` fetched `/healthz` successfully from `127.0.0.1`; kubelet HTTP probes to the Pod IP timed out, and a request to the Pod's own IP also timed out. The Pod remained not Ready, so this is **not** a successful Kubernetes deployment.
+- After the v1 image was loaded, `kubectl apply -k k8s` created the Namespace, Deployment, and Service, but the Deployment rollout timed out. Nginx started and `kubectl exec` fetched `/healthz` successfully from `127.0.0.1`; kubelet HTTP probes to the Pod IP timed out, and a request to the Pod's own IP also timed out. The Pod later entered `CrashLoopBackOff` as liveness probes restarted it, so this is **not** a successful Kubernetes deployment.
 
 ## Not executed
 
